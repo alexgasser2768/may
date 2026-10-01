@@ -1,0 +1,10 @@
+# Réglages de déploiement Netlify (lus automatiquement à l'import du dépôt).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Le script de construction demande Node 20 ou plus récent (aucune dépendance à installer).
+  NODE_VERSION = "22"
+
+# Les en-têtes de sécurité et de cache sont dans src/static/_headers (copié dans dist/).

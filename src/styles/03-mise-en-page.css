@@ -1,0 +1,42 @@
+/* MISE EN PAGE — mobile d'abord. Points de rupture : 30em (480), 48em (768), 64em (1024), 80em (1280). */
+.conteneur {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: max(var(--goutiere), env(safe-area-inset-left, 0px)) max(var(--goutiere), env(safe-area-inset-right, 0px));
+}
+.conteneur--etroit { max-width: 52rem; }
+
+/*
+ * Sections en « feuilles » : chacune recouvre légèrement la précédente avec des
+ * coins arrondis, comme des draps posés les uns sur les autres. Transition douce
+ * entre les sections, sans aucune animation.
+ */
+.section {
+  position: relative;
+  padding-block: var(--section-y) calc(var(--section-y) + var(--rayon-feuille));
+  margin-top: calc(-1 * var(--rayon-feuille));
+  border-radius: var(--rayon-feuille) var(--rayon-feuille) 0 0;
+  box-shadow: 0 -1px 0 var(--trait), 0 -24px 48px -36px rgb(22 80 105 / 0.25);
+  background: var(--fond-section, var(--fond));
+}
+.section--fond { --fond-section: var(--fond); }
+.section--menthe-fond { --fond-section: var(--menthe-fond); }
+.section--bleu-fond { --fond-section: var(--bleu-fond); }
+.section--petrole {
+  --fond-section: var(--petrole);
+  --focus: var(--menthe);
+  color: var(--fond);
+  padding-bottom: var(--section-y);
+}
+.section--petrole :is(h2, h3, .section__intro) { color: var(--fond); }
+.section--petrole .surtitre { color: var(--menthe); }
+
+.section__entete { margin-bottom: clamp(2rem, 1.5rem + 2vw, 3.5rem); --pas: var(--stagger-bloc); }
+.section__intro { font-size: var(--texte-grand); line-height: 1.5; color: var(--encre-douce); }
+.section--petrole .section__intro { color: var(--menthe-pale); }
+
+@media (min-width: 64em) {
+  html { scroll-padding-top: 6.5rem; }
+  body { padding-bottom: 0; }
+}

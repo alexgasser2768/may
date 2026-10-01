@@ -1,0 +1,45 @@
+/*
+ * POLICES — hébergées sur le site (aucun appel à Google : conformité RGPD).
+ *
+ * Fraunces (titres) : sérif chaleureuse, instanciée avec l'axe « SOFT » au maximum
+ * (terminaisons arrondies, ton rassurant), taille optique fixée à 72, graisses 400-600.
+ * 121 Ko → 28 Ko après instanciation et sous-ensemble latin.
+ *
+ * Atkinson Hyperlegible Next (texte) : conçue par le Braille Institute pour les
+ * personnes malvoyantes — lettres très distinctes (I/l/1, O/0), idéale pour un
+ * public âgé. Graisses 400-700 variables, 18 Ko.
+ *
+ * Les polices « repli » reprennent les métriques des polices web (size-adjust,
+ * ascent/descent-override, calculés avec fontTools) : le texte ne bouge pas quand
+ * la vraie police arrive → aucun décalage de mise en page (CLS).
+ */
+@font-face {
+  font-family: "Fraunces";
+  src: url(fonts/fraunces-soft-latin.woff2) format("woff2");
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  src: url(fonts/atkinson-next-latin.woff2) format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fraunces repli";
+  src: local("Times New Roman"), local("TimesNewRomanPSMT"), local("Liberation Serif"), local("Tinos");
+  size-adjust: 108.3%;
+  ascent-override: 90.3%;
+  descent-override: 23.5%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Atkinson repli";
+  src: local("Arial"), local("ArialMT"), local("Liberation Sans"), local("Arimo");
+  size-adjust: 98.9%;
+  ascent-override: 99.5%;
+  descent-override: 31.9%;
+  line-gap-override: 0%;
+}

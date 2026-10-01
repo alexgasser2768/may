@@ -1,0 +1,67 @@
+/*
+ * JETONS DE DESIGN (couleurs, typographie, espacements).
+ * Les jetons de MOUVEMENT sont générés depuis src/scripts/motion/config.js.
+ *
+ * Palette reprise de la carte de visite de May : fond menthe très pâle, bleu pétrole,
+ * bleu moyen, bleu des icônes et menthe.
+ * Contrastes mesurés (WCAG 2.2) :
+ *   --encre sur --fond ......... 12,6:1 (AAA)   --encre-douce sur --menthe-fond .. 5,6:1 (AA)
+ *   blanc sur --petrole ......... 8,8:1 (AAA)   --bleu (liens) sur --fond ........ 5,5:1 (AA)
+ *   --surtitre sur --bleu-fond .. 4,9:1 (AA)    --fond sur --petrole ............. 8,1:1 (AAA)
+ *   --menthe sur --petrole ...... 5,8:1 (AA)    --focus sur --fond ............... 4,3:1 (≥ 3:1 requis)
+ *   --bleu-icone (4,3:1) : réservé aux icônes et décors (≥ 3:1), jamais au petit texte.
+ */
+:root {
+  /* Couleurs de la carte de visite */
+  --fond: #F1F6F3;          /* fond de la carte */
+  --carte: #FAFCFB;         /* cartes et champs, un ton plus clair */
+  --menthe-fond: #E3EFEA;   /* fond de section alterné, menthe */
+  --bleu-fond: #E2ECF0;     /* fond de section alterné, bleu */
+  --encre: #17303B;         /* texte courant : pétrole presque noir */
+  --encre-douce: #46616C;   /* texte secondaire */
+  --petrole: #165069;       /* bleu pétrole de la carte : titres, boutons, fond du contact */
+  --bleu: #206A88;          /* bleu moyen de la carte : liens */
+  --bleu-icone: #267C9D;    /* bleu des icônes de la carte */
+  --bleu-clair: #85A3AF;    /* traits, fil du parcours */
+  --menthe: #AFDCCD;        /* menthe du logo : accents */
+  --menthe-pale: #D7EEE6;   /* fonds d'icônes, survols */
+  --surtitre: #1E6C8A;      /* surtitres et petits textes bleus (≥ 4,5:1) */
+  --focus: #267C9D;
+  --erreur: #A3261B;
+  --marqueur: #FFF1B8;      /* surlignage des [À REMPLACER] : volontairement hors palette */
+  --trait: rgb(22 80 105 / 0.14);
+
+  /* Typographie fluide — jamais moins de 18 px pour le texte courant. */
+  --police-titre: "Fraunces", "Fraunces repli", Georgia, serif;
+  --police-texte: "Atkinson Hyperlegible Next", "Atkinson repli", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --texte-base: clamp(1.125rem, 1.07rem + 0.25vw, 1.25rem);   /* 18 → 20 px */
+  --texte-petit: clamp(1.0625rem, 1.03rem + 0.15vw, 1.125rem); /* 17 → 18 px, notes uniquement */
+  --texte-grand: clamp(1.25rem, 1.15rem + 0.45vw, 1.5rem);
+  --titre-1: clamp(2.25rem, 1.5rem + 3.6vw, 4.5rem);
+  --titre-2: clamp(1.875rem, 1.45rem + 2vw, 3.125rem);
+  --titre-3: clamp(1.3125rem, 1.22rem + 0.45vw, 1.5625rem);
+  --interligne: 1.6;
+  --mesure: 36em; /* ≈ 65 caractères */
+
+  /* Espacements */
+  --e-1: 0.25rem; --e-2: 0.5rem; --e-3: 0.75rem; --e-4: 1rem; --e-5: 1.5rem;
+  --e-6: 2rem; --e-7: 3rem; --e-8: 4rem;
+  --goutiere: clamp(1.25rem, 0.6rem + 3.2vw, 2.5rem);
+  --section-y: clamp(4rem, 2.8rem + 5.5vw, 8rem);
+
+  /* Formes — rien d'anguleux. */
+  --rayon-s: 0.75rem;
+  --rayon-m: 1.25rem;
+  --rayon-l: 2rem;
+  --rayon-feuille: clamp(1.75rem, 1rem + 3vw, 3.5rem);
+  --rayon-pilule: 999px;
+  --ombre-douce: 0 1px 2px rgb(22 80 105 / 0.06), 0 8px 24px -12px rgb(22 80 105 / 0.18);
+  --ombre-levee: 0 2px 4px rgb(22 80 105 / 0.06), 0 22px 44px -18px rgb(22 80 105 / 0.35);
+
+  /* Cibles tactiles */
+  --cible: 3rem;       /* 48 px minimum */
+  --cible-l: 3.5rem;   /* 56 px pour les actions principales */
+
+  /* Barre d'appel mobile */
+  --barre-h: 4.25rem;
+}

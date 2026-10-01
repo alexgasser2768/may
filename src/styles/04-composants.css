@@ -1,0 +1,285 @@
+/* COMPOSANTS */
+
+/* ---------- Icônes ---------- */
+.icone { width: 1.5rem; height: 1.5rem; flex: none; }
+
+/* ---------- Boutons ---------- */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--e-3);
+  min-height: var(--cible);
+  padding: var(--e-3) var(--e-5);
+  border: 2px solid transparent;
+  border-radius: var(--rayon-pilule);
+  font: 700 var(--texte-base)/1.25 var(--police-texte);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  isolation: isolate;
+}
+/* Ombre portée sur un pseudo-élément : on n'anime que son opacité (voir 06-mouvement). */
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: var(--ombre-levee);
+  opacity: 0;
+}
+.btn--large { min-height: var(--cible-l); padding-inline: var(--e-6); }
+.btn--compact { min-height: var(--cible); padding-inline: var(--e-4); font-size: var(--texte-petit); }
+.btn--primaire { background: var(--petrole); color: #fff; }
+.btn--primaire:hover { color: #fff; background: #0F3E53; }
+.btn--secondaire { background: var(--carte); color: var(--petrole); border-color: var(--petrole); }
+.btn--secondaire:hover { color: var(--petrole); background: #fff; }
+.btn__detail { font-weight: 400; white-space: nowrap; }
+
+.bouton-menu {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-2);
+  min-height: var(--cible);
+  min-width: var(--cible);
+  padding: var(--e-2) var(--e-4);
+  border: 2px solid var(--trait);
+  border-radius: var(--rayon-pilule);
+  background: var(--carte);
+  color: var(--petrole);
+  font: 700 var(--texte-petit)/1 var(--police-texte);
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lien-fort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-2);
+  min-height: var(--cible);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ---------- Cartes ---------- */
+.carte {
+  position: relative;
+  padding: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+  border-radius: var(--rayon-l);
+  background: var(--carte);
+  box-shadow: var(--ombre-douce);
+  isolation: isolate;
+}
+.carte::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: var(--ombre-levee);
+  opacity: 0;
+  pointer-events: none;
+}
+.carte > :last-child { margin-bottom: 0; }
+.carte--claire { color: var(--encre); background: var(--fond); }
+.section--petrole .carte--claire :is(h2, h3) { color: var(--petrole); }
+
+/* ---------- Images provisoires ---------- */
+.img-provisoire { position: relative; overflow: hidden; background: var(--bleu-fond); }
+.img-provisoire svg { width: 100%; height: 100%; }
+.img-provisoire__etiquette {
+  position: absolute;
+  left: 50%;
+  bottom: 0.75rem;
+  translate: -50% 0;
+  padding: 0.15em 0.7em;
+  border-radius: var(--rayon-pilule);
+  background: rgb(241 246 243 / 0.92);
+  color: var(--surtitre);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ---------- En-tête ---------- */
+.entete { position: relative; z-index: 20; background: var(--fond); }
+.entete__barre {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-4);
+  min-height: 4.5rem;
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.marque {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-3);
+  min-height: var(--cible);
+  color: var(--petrole);
+  text-decoration: none;
+}
+.marque__signe { width: 2.5rem; height: 2.5rem; flex: none; }
+.marque__texte { display: grid; line-height: 1.15; }
+.marque__nom { font-family: var(--police-titre); font-size: 1.1875rem; font-weight: 600; }
+.marque__metier { font-size: 0.9375rem; color: var(--encre-douce); }
+.entete__nav, .entete__appel { display: none; }
+
+@media (max-width: 22.5em) {
+  /* Très petits écrans (320-360 px) : on garde le nom, le métier passe sous le hero. */
+  .entete .marque__metier { display: none; }
+}
+
+@media (min-width: 64em) {
+  .entete {
+    position: sticky;
+    top: 0;
+    background: rgb(241 246 243 / 0.96);
+    box-shadow: 0 1px 0 var(--trait);
+  }
+  .entete__barre { min-height: 5.5rem; }
+  .entete__nav { display: block; margin-left: auto; }
+  .entete__nav ul { display: flex; gap: clamp(0.25rem, 0.2rem + 0.4vw, 1rem); margin: 0; }
+  .entete__nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--cible);
+    padding-inline: var(--e-2);
+    color: var(--encre);
+    font-weight: 700;
+    font-size: var(--texte-petit);
+    text-decoration-color: transparent;
+  }
+  .entete__nav a:hover { color: var(--bleu); text-decoration-color: currentColor; }
+  .entete__appel { display: inline-flex; white-space: nowrap; }
+  .entete__nav a, .marque__texte { white-space: nowrap; }
+  .entete__menu { display: none; }
+}
+@media (min-width: 64em) and (max-width: 74.99em) {
+  /* 1024-1200 px : on gagne la place du métier (déjà écrit dans le hero) pour garder le numéro sur une ligne. */
+  .entete .marque__metier { display: none; }
+  .entete__nav ul { gap: 0; }
+  .entete__nav a { padding-inline: 0.3rem; }
+  .entete__barre { gap: var(--e-3); }
+  .entete__appel { padding-inline: var(--e-3); }
+}
+
+/* ---------- Barre d'appel (mobile) ---------- */
+.barre-appel {
+  position: fixed;
+  z-index: 30;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: var(--e-2);
+  padding: var(--e-2) max(var(--e-3), env(safe-area-inset-right, 0px)) calc(var(--e-2) + env(safe-area-inset-bottom, 0px)) max(var(--e-3), env(safe-area-inset-left, 0px));
+  background: rgb(241 246 243 / 0.97);
+  box-shadow: 0 -1px 0 var(--trait), 0 -10px 30px -18px rgb(22 80 105 / 0.3);
+}
+.barre-appel__btn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  min-height: calc(var(--barre-h) - 1rem);
+  border-radius: var(--rayon-m);
+  color: var(--petrole);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.1;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.barre-appel__btn--appel {
+  flex-direction: row;
+  gap: var(--e-2);
+  background: var(--petrole);
+  color: #fff;
+  font-size: 1.0625rem;
+}
+.barre-appel__btn--appel:hover { color: #fff; }
+@media (min-width: 64em) {
+  .barre-appel { display: none; }
+}
+@media (max-height: 30em) and (orientation: landscape) {
+  /* Téléphone à l'horizontale : barre plus basse pour laisser voir le contenu. */
+  :root { --barre-h: 3.5rem; }
+  .barre-appel__btn { flex-direction: row; gap: var(--e-2); }
+}
+
+/* ---------- Menu mobile (dialog) ---------- */
+.menu {
+  width: 100%;
+  max-width: 100%;
+  max-height: 100dvh;
+  margin: auto 0 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--encre);
+}
+html.menu-ouvert { overflow: hidden; }
+.menu::backdrop { background: rgb(12 40 53 / 0.5); }
+.menu__feuille {
+  max-height: min(92dvh, 46rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--e-4) max(var(--goutiere), env(safe-area-inset-right, 0px)) calc(var(--e-5) + env(safe-area-inset-bottom, 0px)) max(var(--goutiere), env(safe-area-inset-left, 0px));
+  border-radius: var(--rayon-l) var(--rayon-l) 0 0;
+  background: var(--fond);
+}
+.menu__entete { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--e-2); }
+.menu__titre { margin: 0; font-family: var(--police-titre); font-size: var(--titre-3); color: var(--petrole); }
+.menu__liens { margin: 0 0 var(--e-5); }
+.menu__liens li + li { border-top: 1px solid var(--trait); }
+.menu__liens a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--cible-l);
+  padding-block: var(--e-2);
+  color: var(--encre);
+  font-family: var(--police-titre);
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+.menu__fleche { color: var(--bleu); }
+.menu__actions .btn { width: 100%; }
+
+/* ---------- Pied de page ---------- */
+.pied {
+  position: relative;
+  padding-block: var(--e-8);
+  margin-top: calc(-1 * var(--rayon-feuille));
+  border-radius: var(--rayon-feuille) var(--rayon-feuille) 0 0;
+  background: var(--menthe-fond);
+  font-size: var(--texte-petit);
+}
+.pied__grille { display: grid; gap: var(--e-6); }
+.pied__titre { font-size: var(--texte-grand); margin-bottom: var(--e-2); }
+.pied ul { margin: 0; }
+.pied li a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--cible);
+  color: var(--encre);
+}
+.pied__note { color: var(--encre-douce); }
+@media (min-width: 48em) {
+  .pied__grille { grid-template-columns: 1.4fr 1fr 1fr; }
+}
+@media (max-width: 22.5em) {
+  /* 320-360 px : libellés sur une ligne. */
+  .barre-appel { grid-template-columns: 1.2fr 1fr 1fr; gap: var(--e-1); }
+  .barre-appel__btn { font-size: 0.875rem; white-space: nowrap; }
+}

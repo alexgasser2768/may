@@ -1,0 +1,457 @@
+{
+  "_lisezmoi": [
+    "FICHIER DE CONTENU DU SITE — c'est le seul fichier à modifier pour changer les textes.",
+    "Règles : ne touchez qu'au texte situé à droite des deux-points, entre guillemets.",
+    "Pour mettre des guillemets dans un texte, utilisez « » plutôt que \".",
+    "Tout ce qui est entre [CROCHETS] est une information à fournir (numéro, tarif, nom…).",
+    "\"provisoire\": true signale une section dont le texte est un exemple à réécrire. Passez-le à false une fois le texte validé.",
+    "\"afficher\": false masque une section entière du site.",
+    "Après modification : lancez « npm run build » (voir README.md). Le programme signale toute erreur de virgule ou de guillemet."
+  ],
+  "site": {
+    "provisoire": true,
+    "nom": "May Van Overveldt",
+    "metier": "Kinésithérapeute à domicile",
+    "titrePage": "May Van Overveldt — Kinésithérapeute à domicile à Woluwe-Saint-Pierre et environs",
+    "description": "Kiné à domicile à Woluwe-Saint-Pierre et environs : rééducation post-opératoire, gériatrie, respiratoire, dos, prévention des chutes.",
+    "url": "https://[NOM-DE-DOMAINE].be",
+    "langue": "fr-BE",
+    "annee": "2026"
+  },
+  "contact": {
+    "provisoire": true,
+    "telephoneAffiche": "+32 470 22 74 19",
+    "_aideTelephoneLien": "Le numéro au format international, sans espaces (utilisé par les boutons « Appeler » et « SMS »).",
+    "telephoneLien": "+32470227419",
+    "email": "mayv.kine@gmail.com",
+    "horaires": [
+      {
+        "jours": "Lundi – vendredi",
+        "heures": "8 h – 18 h"
+      },
+      {
+        "jours": "Week-end et jours fériés",
+        "heures": "Fermé"
+      }
+    ],
+    "joignabilite": "En séance, je ne décroche pas toujours. Laissez nom et numéro : je rappelle le jour même ou le lendemain matin.",
+    "urgence": "Pas pour les urgences : appelez le 112."
+  },
+  "navigation": [
+    {
+      "libelle": "Soins",
+      "cible": "soins"
+    },
+    {
+      "libelle": "Déroulement",
+      "cible": "seance"
+    },
+    {
+      "libelle": "Zone",
+      "cible": "zone"
+    },
+    {
+      "libelle": "À propos",
+      "cible": "a-propos"
+    },
+    {
+      "libelle": "Questions",
+      "cible": "faq"
+    },
+    {
+      "libelle": "Contact",
+      "cible": "contact"
+    }
+  ],
+  "interface": {
+    "lienEvitement": "Aller au contenu",
+    "retourAccueil": "Retour à l'accueil",
+    "etape": "Étape {n} sur {total}"
+  },
+  "boutons": {
+    "appeler": "Appeler",
+    "appelerLong": "Appeler May",
+    "rendezVous": "Prendre rendez-vous",
+    "rendezVousCourt": "Rendez-vous",
+    "sms": "Envoyer un SMS",
+    "menu": "Menu",
+    "fermer": "Fermer le menu",
+    "pauseAnimation": "Mettre l'animation en pause",
+    "repriseAnimation": "Relancer l'animation"
+  },
+  "accueil": {
+    "provisoire": true,
+    "surtitre": "Kinésithérapeute à domicile · Woluwe-Saint-Pierre",
+    "titre": "La kinésithérapie qui vient jusqu'à vous.",
+    "_aideTitreSouligne": "Partie du titre soulignée d'un trait dessiné à la main. Doit apparaître telle quelle dans le titre ; laissez \"\" pour aucun soulignement.",
+    "titreSouligne": "jusqu'à vous",
+    "texte": "Je suis May Van Overveldt. Je vous accompagne à domicile pour retrouver mouvement, autonomie et confiance, à votre rythme.",
+    "reassurances": [
+      "À domicile, autour de Woluwe-Saint-Pierre",
+      "Sur prescription médicale",
+      "Kinésithérapeute conventionnée"
+    ],
+    "image": {
+      "fichier": "may-portrait",
+      "alt": "Portrait illustré de May Van Overveldt, souriante",
+      "largeur": 800,
+      "hauteur": 1000,
+      "legendeProvisoire": "Photo provisoire — portrait de May (format 4:5)"
+    }
+  },
+  "soins": {
+    "afficher": true,
+    "provisoire": true,
+    "surtitre": "Soins proposés",
+    "titre": "Des soins adaptés à votre situation",
+    "intro": "Votre situation n'y est pas ? Écrivez-moi.",
+    "liste": [
+      {
+        "icone": "genou",
+        "titre": "Rééducation après une opération",
+        "texte": "Prothèse, fracture, épaule…"
+      },
+      {
+        "icone": "canne",
+        "titre": "Kinésithérapie gériatrique",
+        "texte": "Force, équilibre, autonomie"
+      },
+      {
+        "icone": "souffle",
+        "titre": "Kinésithérapie respiratoire",
+        "texte": "Encombrement, bronchite…"
+      },
+      {
+        "icone": "dos",
+        "titre": "Douleurs de dos et de nuque",
+        "texte": ""
+      },
+      {
+        "icone": "equilibre",
+        "titre": "Prévention des chutes",
+        "texte": ""
+      },
+      {
+        "icone": "cerveau",
+        "titre": "Suivi des pathologies neurologiques",
+        "texte": "Parkinson, après un AVC…"
+      }
+    ],
+    "_aide": "Chaque soin : un titre, et si besoin quelques mots-clés (\"texte\"). Laissez \"texte\": \"\" si le titre suffit."
+  },
+  "seance": {
+    "afficher": true,
+    "provisoire": true,
+    "surtitre": "Comment ça se passe",
+    "titre": "Une séance à domicile, étape par étape",
+    "intro": "",
+    "etapes": [
+      {
+        "titre": "Vous me contactez",
+        "texte": "Par téléphone, SMS ou e-mail, pour vous ou pour un proche."
+      },
+      {
+        "titre": "Vous préparez vos documents",
+        "texte": "La prescription de votre médecin et votre carte d'identité."
+      },
+      {
+        "titre": "Premier rendez-vous : le bilan",
+        "texte": "Chez vous, nous faisons le point et fixons vos objectifs."
+      },
+      {
+        "titre": "Les séances, chez vous",
+        "texte": "Avec ce que vous avez à la maison : une chaise, un escalier."
+      },
+      {
+        "titre": "Le suivi et l'autonomie",
+        "texte": "Quelques exercices entre les séances, pour avancer à votre rythme."
+      }
+    ],
+    "arrivee": "Et vous restez chez vous."
+  },
+  "zone": {
+    "afficher": true,
+    "provisoire": false,
+    "surtitre": "Zone d'intervention",
+    "titre": "Je me déplace autour de Woluwe-Saint-Pierre",
+    "intro": "Jusqu'à environ 30 minutes de route. Votre commune n'y est pas ? Écrivez-moi.",
+    "communes": [
+      {
+        "nom": "Auderghem",
+        "lat": 50.815,
+        "lon": 4.433
+      },
+      {
+        "nom": "Bruxelles",
+        "lat": 50.8467,
+        "lon": 4.3525
+      },
+      {
+        "nom": "Etterbeek",
+        "lat": 50.836,
+        "lon": 4.387
+      },
+      {
+        "nom": "Evere",
+        "lat": 50.871,
+        "lon": 4.402
+      },
+      {
+        "nom": "Ixelles",
+        "lat": 50.827,
+        "lon": 4.372
+      },
+      {
+        "nom": "Kraainem",
+        "lat": 50.861,
+        "lon": 4.469
+      },
+      {
+        "nom": "Schaerbeek",
+        "lat": 50.867,
+        "lon": 4.378
+      },
+      {
+        "nom": "Tervuren",
+        "lat": 50.823,
+        "lon": 4.514
+      },
+      {
+        "nom": "Watermael-Boitsfort",
+        "lat": 50.799,
+        "lon": 4.416
+      },
+      {
+        "nom": "Woluwe-Saint-Lambert",
+        "lat": 50.843,
+        "lon": 4.427
+      },
+      {
+        "nom": "Zaventem",
+        "lat": 50.884,
+        "lon": 4.472
+      }
+    ],
+    "legendeCarte": "Carte simplifiée, positions approximatives.",
+    "_aide": "Communes par ordre alphabétique. lat/lon = coordonnées approximatives du centre de la commune (clic droit sur Google Maps pour les copier) : elles placent le point sur la carte. Sans lat/lon, le point est placé automatiquement.",
+    "base": {
+      "nom": "Woluwe-Saint-Pierre",
+      "lat": 50.8335,
+      "lon": 4.431
+    }
+  },
+  "aPropos": {
+    "afficher": true,
+    "provisoire": true,
+    "surtitre": "À propos",
+    "titre": "Bonjour, moi c'est May !",
+    "paragraphes": [
+      "Diplômée de l'UCLouvain en kinésithérapie et réadaptation, je travaille avec des méthodes actuelles et validées scientifiquement.",
+      "J'ai choisi de soigner à domicile, là où l'on se sent le mieux pour avancer. Avec moi, les séances se passent dans la bonne humeur : on bouge, on rit un peu, et vos proches sont les bienvenus."
+    ],
+    "qualitesTitre": "En quelques mots, je suis…",
+    "_aideQualites": "4 qualités, présentées comme des petites étiquettes fleuries. « texte » facultatif : laissez \"\" pour n'afficher que le mot.",
+    "qualites": [
+      {
+        "titre": "Créative",
+        "texte": ""
+      },
+      {
+        "titre": "À l'écoute",
+        "texte": ""
+      },
+      {
+        "titre": "Souriante",
+        "texte": ""
+      },
+      {
+        "titre": "Patiente",
+        "texte": ""
+      }
+    ],
+    "formationTitre": "Ma formation",
+    "diplomes": [
+      "Master en kinésithérapie et réadaptation",
+      "Bachelier en kinésithérapie et réadaptation"
+    ],
+    "universite": "UCLouvain, Louvain-la-Neuve",
+    "stagesTitre": "Stages partout en Belgique",
+    "stagesLieux": "En hôpital, en centre de revalidation et en cabinet privé.",
+    "stages": [
+      "Gériatrie",
+      "Soins intensifs",
+      "Orthopédie et revalidation",
+      "Neurologie et revalidation",
+      "Neuropédiatrie"
+    ],
+    "image": {
+      "fichier": "may-fleurs",
+      "alt": "Illustration de May Van Overveldt, souriante, les yeux fermés, entourée de fleurs",
+      "largeur": 1600,
+      "hauteur": 1200,
+      "legendeProvisoire": "Photo provisoire — May en séance (format 4:3)"
+    }
+  },
+  "tarifs": {
+    "afficher": false,
+    "provisoire": true,
+    "surtitre": "Combien ça coûte",
+    "titre": "Tarifs et remboursement",
+    "intro": "Le remboursement dépend de votre prescription et de votre mutualité. Je vous explique tout au premier appel.",
+    "cartes": [
+      {
+        "titre": "Séance à domicile",
+        "montant": "[TARIF] €",
+        "detail": "Déplacement compris. Remboursé : [MONTANT À CONFIRMER]."
+      },
+      {
+        "titre": "Premier bilan",
+        "montant": "[TARIF] €",
+        "detail": "[DÉTAIL À CONFIRMER — durée, contenu, remboursement]."
+      }
+    ],
+    "points": [
+      {
+        "titre": "Conventionnement",
+        "texte": "Je suis conventionnée : j'applique les tarifs officiels fixés par l'INAMI."
+      },
+      {
+        "titre": "Prescription médicale",
+        "texte": "Nécessaire pour le remboursement. [MENTIONS UTILES POUR LES SOINS À DOMICILE — À VÉRIFIER]."
+      },
+      {
+        "titre": "Mutualité",
+        "texte": "Attestation de soins à remettre à votre mutualité. [OU : TIERS PAYANT — À CONFIRMER]."
+      },
+      {
+        "titre": "Paiement",
+        "texte": "[MOYENS DE PAIEMENT ACCEPTÉS — À CONFIRMER]."
+      }
+    ]
+  },
+  "temoignages": {
+    "afficher": false,
+    "provisoire": true,
+    "_aide": "N'utilisez que de vrais avis, avec l'accord écrit de la personne. Vérifiez au préalable que la publication de témoignages est autorisée pour votre profession (voir LIMITES.md). Si vous n'en avez pas, mettez \"afficher\": false.",
+    "surtitre": "Témoignages",
+    "titre": "Ce qu'en disent les patients",
+    "liste": [
+      {
+        "texte": "[TÉMOIGNAGE 1 — avis réel d'environ 40 mots, avec accord écrit. Ex. : rééducation après une opération.]",
+        "auteur": "[PRÉNOM ET INITIALE]",
+        "contexte": "[CONTEXTE — ex. : rééducation du genou]"
+      },
+      {
+        "texte": "[TÉMOIGNAGE 2 — avis réel d'environ 30 mots, idéalement d'un proche.]",
+        "auteur": "[PRÉNOM ET INITIALE]",
+        "contexte": "[CONTEXTE — ex. : pour sa mère]"
+      },
+      {
+        "texte": "[TÉMOIGNAGE 3 — avis réel, une ou deux phrases.]",
+        "auteur": "[PRÉNOM ET INITIALE]",
+        "contexte": "[CONTEXTE]"
+      }
+    ]
+  },
+  "faq": {
+    "afficher": true,
+    "provisoire": true,
+    "surtitre": "Questions fréquentes",
+    "titre": "Vos questions",
+    "questions": [
+      {
+        "question": "Faut-il une prescription médicale ?",
+        "reponse": "Oui, une prescription de votre médecin est obligatoire. Pas encore de prescription ? Écrivez-moi, on en parle."
+      },
+      {
+        "question": "Quels sont vos tarifs ?",
+        "reponse": "Je suis conventionnée : j'applique les tarifs officiels fixés par l'INAMI. Une partie est remboursée par votre mutualité."
+      },
+      {
+        "question": "Qui peut bénéficier de soins à domicile ?",
+        "reponse": "Les personnes pour qui se déplacer est difficile : après une opération, mobilité réduite, grande fatigue, maladie chronique."
+      },
+      {
+        "question": "Puis-je appeler pour un parent ?",
+        "reponse": "Bien sûr, c'est fréquent. Et si la personne ne peut pas faire les démarches seule, on s'arrange ensemble."
+      },
+      {
+        "question": "De quoi avez-vous besoin chez moi ?",
+        "reponse": "Un peu de place et une chaise stable. J'apporte le matériel. Portez des vêtements confortables."
+      },
+      {
+        "question": "Combien de temps dure une séance ?",
+        "reponse": "Cela dépend de vos besoins et de votre prescription, tout comme le nombre de séances."
+      },
+      {
+        "question": "Et si je dois annuler un rendez-vous ?",
+        "reponse": "Prévenez-moi au moins 24 h à l'avance, par téléphone ou par SMS."
+      }
+    ]
+  },
+  "rendezVous": {
+    "provisoire": true,
+    "surtitre": "Contact et rendez-vous",
+    "titre": "Prendre rendez-vous",
+    "intro": "Le plus simple : m'appeler. Sinon, SMS ou e-mail, je vous rappelle vite.",
+    "telephoneTitre": "Par téléphone ou e-mail",
+    "horairesTitre": "Heures d'appel",
+    "formulaire": {
+      "_aideAfficher": "Formulaire masqué pour l'instant (contact par téléphone, SMS ou e-mail). Passez à true pour le réafficher, après avoir configuré « action ».",
+      "afficher": false,
+      "titre": "Ou laissez-moi un message",
+      "intro": "Champs obligatoires, sauf « facultatif ».",
+      "_aideAction": "Adresse du service qui recevra les messages (Formspree, Netlify Forms, serveur propre…). Tant qu'elle est entre crochets, le formulaire fonctionne en mode démonstration et n'envoie rien.",
+      "action": "[URL DU SERVICE DE FORMULAIRE]",
+      "champs": {
+        "nom": {
+          "libelle": "Nom et prénom",
+          "aide": "Le vôtre ou celui de la personne à soigner."
+        },
+        "telephone": {
+          "libelle": "Numéro de téléphone",
+          "aide": ""
+        },
+        "email": {
+          "libelle": "Adresse e-mail (facultatif)",
+          "aide": ""
+        },
+        "commune": {
+          "libelle": "Commune des soins",
+          "aide": ""
+        },
+        "message": {
+          "libelle": "Votre message",
+          "aide": "Type de soin, disponibilités. Inutile de détailler votre dossier médical."
+        },
+        "consentement": {
+          "libelle": "J'accepte que ces informations, y compris de santé, servent uniquement à me recontacter.",
+          "lien": "Protection des données"
+        }
+      },
+      "erreurs": {
+        "resume": "Merci de corriger les champs indiqués.",
+        "nom": "Indiquez votre nom.",
+        "telephone": "Numéro incomplet : au moins 9 chiffres (ex. +32 4xx xx xx xx).",
+        "telephoneVide": "Indiquez un numéro pour que je puisse vous rappeler.",
+        "email": "Adresse incomplète (ex. nom@exemple.be).",
+        "commune": "Indiquez la commune des soins.",
+        "message": "Écrivez quelques mots sur votre demande (le type de soin, par exemple).",
+        "consentement": "Cochez cette case pour que je puisse vous rappeler.",
+        "envoi": "Échec de l'envoi (connexion ?). Réessayez ou appelez le +32 470 22 74 19."
+      },
+      "envoyer": "Envoyer ma demande",
+      "envoiEnCours": "Envoi en cours…",
+      "succesTitre": "Merci, message bien reçu.",
+      "succesTexte": "Je vous rappelle en général dans la journée.",
+      "demoTexte": "Mode démonstration : rien n'a été envoyé."
+    }
+  },
+  "pied": {
+    "provisoire": true,
+    "texte": "Kinésithérapeute à domicile à Woluwe-Saint-Pierre et environs.",
+    "liensLegaux": [],
+    "navigationTitre": "Sur ce site"
+  },
+  "pagesLegales": {}
+}

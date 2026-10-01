@@ -1,0 +1,329 @@
+/*
+ * MOUVEMENT
+ * =========
+ * Toutes les valeurs viennent des variables générées depuis motion/config.js.
+ * Seules les propriétés composées par le GPU sont animées (transform via
+ * translate / scale / rotate, et opacity), sauf exceptions commentées.
+ *
+ * Deux régimes, toujours pensés tous les deux :
+ *   (prefers-reduced-motion: no-preference) → chorégraphies complètes ;
+ *   (prefers-reduced-motion: reduce)        → fondus simples ou états statiques.
+ */
+
+/* Ressort : linear() si disponible, sinon approximation cubic-bezier. */
+:root { --ressort: var(--ease-ressort-repli); }
+@supports (transition-timing-function: linear(0, 1)) {
+  :root { --ressort: var(--ease-ressort); }
+}
+
+/* Index d'enchaînement (posé par le gabarit : data-i="0…7"). */
+[data-i="1"] { --i: 1; } [data-i="2"] { --i: 2; } [data-i="3"] { --i: 3; }
+[data-i="4"] { --i: 4; } [data-i="5"] { --i: 5; } [data-i="6"] { --i: 6; } [data-i="7"] { --i: 7; }
+
+/* ============================================================================
+ * 1. APPARITIONS AU SCROLL
+ * Actives seulement si le script de tête a posé .reveal-ok : sans JS, tout est
+ * visible d'emblée. Une animation (et non une transition) est utilisée pour ne
+ * pas entrer en conflit avec les transitions de survol sur `transform`.
+ * ========================================================================== */
+.reveal-ok [data-reveal]:not(.est-visible) { opacity: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-ok [data-reveal].est-visible {
+    animation: apparition var(--dur-recit) var(--ease-arrivee) both;
+    /* Titre → texte → cartes : chaque élément suit le précédent de --pas. */
+    animation-delay: calc(var(--i, 0) * var(--pas, var(--stagger-liste)));
+  }
+  /* Les étapes de la séance montent de plus loin : c'est un récit. */
+  .reveal-ok .etape.est-visible { animation-name: apparition-recit; animation-duration: calc(var(--dur-recit) * 1.15); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ok [data-reveal].est-visible { animation: fondu var(--dur-interface) var(--ease-geste) both; }
+}
+@keyframes apparition { from { opacity: 0; translate: 0 var(--shift-md); } to { opacity: 1; translate: 0 0; } }
+@keyframes apparition-recit { from { opacity: 0; translate: 0 var(--shift-lg); } to { opacity: 1; translate: 0 0; } }
+@keyframes fondu { from { opacity: 0; } to { opacity: 1; } }
+
+/* ============================================================================
+ * 2. MOMENT SIGNATURE « LE SOUFFLE » — hero
+ * Trois formes organiques respirent ensemble sur un cycle de 11 s
+ * (5,5 s d'inspiration, 5,5 s d'expiration, ease sinusoïdale). Le halo du
+ * portrait respire en phase avec la première forme : la page « respire » d'un
+ * seul souffle. Chaque forme tourne en plus très lentement sur elle-même
+ * (75 à 120 s par tour) : comme ses coins sont irréguliers, sa silhouette
+ * semble se transformer, sans aucun calcul de morphing.
+ * Le texte et les boutons ne sont PAS animés : ils s'affichent immédiatement.
+ * ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__souffle { animation: formes-entree var(--dur-signature) var(--ease-arrivee) both; }
+  .forme { animation: souffle-1 calc(var(--dur-souffle) / 2) var(--ease-souffle) infinite alternate both; }
+  .forme--2 { animation-name: souffle-2; animation-delay: calc(var(--dur-souffle) / -3); }
+  .forme--3 { animation-name: souffle-3; animation-delay: calc(var(--dur-souffle) / -1.6); }
+  .forme > span { animation: derive 96s linear infinite; }
+  .forme--2 > span { animation-duration: 120s; animation-direction: reverse; }
+  .forme--3 > span { animation-duration: 76s; }
+  .hero__halo { animation: halo calc(var(--dur-souffle) / 2) var(--ease-souffle) infinite alternate both; }
+  /* Côté fun : la tache pétrole respire avec le reste, le trait se dessine sous
+     « jusqu'à vous », les fleurs éclosent puis se balancent. Le texte, lui, est
+     déjà affiché : seul le décor bouge. */
+  .hero__tache { animation: souffle-2 calc(var(--dur-souffle) / 2) var(--ease-souffle) infinite alternate both; }
+  .souligne__trait path { animation: trait-main var(--dur-signature) var(--ease-arrivee) 350ms both; }
+  .hero .fleur {
+    animation:
+      eclosion-fleur var(--dur-recit) var(--ressort) var(--delai-fleur, 700ms) both,
+      balance calc(var(--dur-souffle) / 2) var(--ease-souffle) calc(var(--dur-recit) + var(--delai-fleur, 700ms)) infinite alternate;
+  }
+  .hero__fleur--b { --delai-fleur: 850ms; }
+  .hero__fleur--c { --delai-fleur: 1000ms; }
+  .hero__fleur--d { --delai-fleur: 1150ms; }
+  .hero__fleur--e { --delai-fleur: 920ms; }
+  .hero__fleur--f { --delai-fleur: 1300ms; }
+  .hero .hero__fleur--e { animation-direction: normal, alternate-reverse; }
+  .hero .hero__fleur--b, .hero .hero__fleur--d { animation-direction: normal, alternate-reverse; }
+
+  /* Pause : case « pause » cochée (fonctionne sans JS grâce à :has),
+     classe posée par JS (navigateurs sans :has), ou hero hors de l'écran. */
+  .hero:has(.souffle-pause__case:checked) :is(.forme, .forme > span, .hero__halo, .hero__tache, .fleur),
+  .hero.souffle-suspendu :is(.forme, .forme > span, .hero__halo, .hero__tache, .fleur),
+  .hero.hors-ecran :is(.forme, .forme > span, .hero__halo, .hero__tache, .fleur) { animation-play-state: paused; }
+
+  .souffle-pause__bouton { transition: background-color var(--dur-rapide) var(--ease-geste), scale var(--dur-rapide) var(--ressort); }
+  .souffle-pause__bouton:active { scale: var(--scale-press); transition-duration: var(--dur-instant); }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Composition figée, identique à l'instant « milieu de respiration ». Pas de bouton pause inutile. */
+  .souffle-pause { display: none; }
+}
+@keyframes formes-entree { from { opacity: 0; scale: 0.94; } to { opacity: 1; scale: 1; } }
+@keyframes souffle-1 { from { scale: 1; translate: 0 0; } to { scale: var(--scale-souffle); translate: -2% 3%; } }
+@keyframes souffle-2 { from { scale: 1; translate: 0 0; } to { scale: var(--scale-souffle); translate: 3% -2%; } }
+@keyframes souffle-3 { from { scale: 1.02; translate: 0 0; } to { scale: calc(var(--scale-souffle) + 0.02); translate: -3% -2%; } }
+@keyframes derive { to { rotate: 360deg; } }
+@keyframes trait-main { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes halo { from { scale: 1; opacity: 0.4; } to { scale: 1.07; opacity: 0.95; } }
+
+/* ============================================================================
+ * 3. MOMENT SIGNATURE « LE TRAJET » — séance à domicile
+ * Un fil vertical se remplit au rythme du défilement, du premier appel jusqu'à
+ * la maison. La pointe du fil suit une « ligne de lecture » placée à 60 % de la
+ * hauteur de l'écran (config.observe.ligneLecture). Quand elle atteint une
+ * étape, sa pastille se remplit (ressort léger) ; quand elle atteint la maison,
+ * la fenêtre s'illumine. Le défilement reste 100 % natif : on suit le doigt,
+ * on ne le guide jamais.
+ * ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  /* a) Navigateurs récents : animation liée au scroll, sans JavaScript. */
+  @supports (animation-timeline: view()) {
+    .parcours__fil {
+      view-timeline: --trajet block;
+      /* Réduit la zone d'observation à une ligne à 60 % du haut de l'écran. */
+      view-timeline-inset: 59.5% 40%;
+    }
+    .parcours__fil-trace {
+      animation: trace linear both;
+      animation-timeline: --trajet;
+      animation-range: cover 0% cover 100%;
+    }
+  }
+  /* b) Autres navigateurs : parcours.js écrit scale directement (rAF, section visible uniquement). */
+  .est-actif .parcours__fil-trace { scale: 1 0; }
+
+  /* Pastilles : vides tant que la ligne de lecture ne les a pas atteintes. */
+  .est-actif .etape__marqueur {
+    background: var(--carte);
+    color: var(--bleu);
+    box-shadow: 0 0 0 6px var(--bleu-fond), inset 0 0 0 2px var(--bleu-clair);
+    transition: color var(--dur-interface) var(--ease-geste);
+  }
+  .est-actif .etape__marqueur::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--petrole);
+    scale: 0.2;
+    opacity: 0;
+    transition: scale var(--dur-interface) var(--ressort), opacity var(--dur-rapide) var(--ease-geste);
+  }
+  .est-actif .est-atteinte .etape__marqueur { color: #fff; }
+  .est-actif .est-atteinte .etape__marqueur::before { scale: 1; opacity: 1; }
+
+  /* Arrivée : la maison se soulève à peine, la fenêtre s'allume. */
+  .est-actif .parcours__maison { transition: translate var(--dur-recit) var(--ease-arrivee); }
+  .est-actif .parcours__fenetre { opacity: 0; scale: 0.5; transition: opacity var(--dur-signature) var(--ease-arrivee), scale var(--dur-signature) var(--ease-arrivee); }
+  .est-actif.est-arrive .parcours__maison { translate: 0 calc(var(--shift-xs) * -2); }
+  .est-actif.est-arrive .parcours__fenetre { opacity: 1; scale: 1.25; }
+}
+@keyframes trace { from { scale: 1 0; } to { scale: 1 1; } }
+
+/* ============================================================================
+ * 4. MOMENT SIGNATURE « LE RAYONNEMENT » — zone d'intervention
+ * Trois ondes partent lentement de la maison de May, comme un caillou dans
+ * l'eau : « je me déplace jusqu'à vous ». Cycle 7,5 s, ondes décalées de 2,5 s.
+ * Uniquement quand la carte est à l'écran (zone.js).
+ * ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  .zone__carte.est-en-vue .zone__onde { animation: onde 7.5s var(--ease-arrivee) infinite; }
+  .zone__carte.est-en-vue .zone__onde:nth-of-type(2) { animation-delay: 2.5s; }
+  .zone__carte.est-en-vue .zone__onde:nth-of-type(3) { animation-delay: 5s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Une onde fixe suffit à suggérer le rayon d'action. */
+  .zone__onde:first-of-type { opacity: 0.18; scale: 2.2; }
+}
+@keyframes onde {
+  0% { opacity: 0; scale: 0.6; }
+  12% { opacity: 0.55; }
+  100% { opacity: 0; scale: 3.3; }
+}
+
+/* ============================================================================
+ * 4 bis. LES FLEURS — section « À propos »
+ * Quand leur bloc apparaît, les fleurs éclosent (échelle 0,3 → 1 avec le léger
+ * ressort), l'une après l'autre. Ensuite elles se balancent doucement (± 7°),
+ * au rythme du souffle du hero (11 s par aller-retour) : la page respire
+ * toujours au même tempo. Deux animations sur deux propriétés distinctes
+ * (scale/opacity puis rotate) : aucune ne contrarie l'autre.
+ * Sans JS : fleurs immobiles et visibles. Mouvement réduit : immobiles.
+ * ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-ok .est-visible .fleur {
+    animation:
+      eclosion-fleur var(--dur-recit) var(--ressort) calc(var(--i, 0) * var(--stagger-liste) + var(--delai-fleur, 250ms)) both,
+      balance calc(var(--dur-souffle) / 2) var(--ease-souffle) calc(var(--dur-recit) + var(--delai-fleur, 250ms)) infinite alternate;
+  }
+  .apropos__fleur--b { --delai-fleur: 450ms; }
+  .apropos__fleur--c { --delai-fleur: 650ms; }
+  .domaines li:nth-child(2) .fleur { --delai-fleur: 340ms; }
+  .domaines li:nth-child(3) .fleur { --delai-fleur: 430ms; }
+  .domaines li:nth-child(4) .fleur { --delai-fleur: 520ms; }
+  .domaines li:nth-child(5) .fleur { --delai-fleur: 610ms; }
+  .bouquet__f2 { --delai-fleur: 420ms; }
+  .bouquet__f3 { --delai-fleur: 580ms; }
+  .reveal-ok .est-visible .bouquet__f2 { animation-direction: normal, alternate-reverse; }
+  /* Une fleur sur deux se balance dans l'autre sens (spécificité ≥ la règle ci-dessus). */
+  .reveal-ok .est-visible.qualite:nth-child(even) .fleur,
+  .reveal-ok .est-visible .apropos__fleur--b { animation-direction: normal, alternate-reverse; }
+
+  /* Étiquettes : se redressent et se soulèvent au survol (bonus souris). */
+  @media (hover: hover) and (pointer: fine) {
+    .qualite { transition: rotate var(--dur-interface) var(--ressort), translate var(--dur-interface) var(--ressort); }
+    .qualite:hover { rotate: 0deg; translate: 0 -3px; }
+  }
+}
+@keyframes eclosion-fleur { from { opacity: 0; scale: 0.3; } to { opacity: 1; scale: 1; } }
+@keyframes balance { from { rotate: -7deg; } to { rotate: 7deg; } }
+
+/* ============================================================================
+ * 5. MICRO-INTERACTIONS — discrètes, jamais nécessaires à la compréhension.
+ * Le survol n'est qu'un bonus (hover: hover) ; l'appui (:active) donne un
+ * retour sur tous les écrans, tactiles compris.
+ * ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  .btn, .bouton-menu, .barre-appel__btn {
+    transition:
+      transform var(--dur-interface) var(--ressort),
+      background-color var(--dur-rapide) var(--ease-geste),
+      color var(--dur-rapide) var(--ease-geste),
+      border-color var(--dur-rapide) var(--ease-geste);
+  }
+  .btn::after, .carte::after { transition: opacity var(--dur-interface) var(--ease-geste); }
+  .btn .icone { transition: translate var(--dur-interface) var(--ressort); }
+  .btn:active, .bouton-menu:active, .barre-appel__btn:active {
+    transform: scale(var(--scale-press));
+    transition-duration: var(--dur-instant);
+    transition-timing-function: var(--ease-geste);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn:hover { transform: translateY(calc(var(--shift-xs) * -1)); }
+    .btn:hover::after { opacity: 1; }
+    .formulaire__envoyer:hover .icone, .menu__liens a:hover .menu__fleche { translate: 4px 0; }
+    .cartes-soins .carte, .tarif, .temoignage { transition: transform var(--dur-recit) var(--ease-arrivee); }
+    .cartes-soins .carte:hover, .tarif:hover, .temoignage:hover { transform: translateY(-4px) scale(var(--scale-lift)); }
+    .cartes-soins .carte:hover::after, .tarif:hover::after, .temoignage:hover::after { opacity: 1; }
+    .carte-soin__icone { transition: rotate var(--dur-recit) var(--ressort); }
+    .carte-soin:hover .carte-soin__icone { rotate: -6deg; }
+    .faq__item summary { transition: background-color var(--dur-rapide) var(--ease-geste); }
+    .faq__item summary:hover { background: rgb(226 236 240 / 0.7); }
+    .bouton-menu:hover { background: #fff; }
+  }
+
+  /* Focus : l'anneau se « pose » (7 px → 3 px). Exclut les éléments animés à l'apparition. */
+  :focus-visible:not([data-reveal]) { animation: focus-pose var(--dur-rapide) var(--ease-arrivee); }
+
+  /* Surtitres : le petit trait se dessine quand le bloc apparaît. */
+  .reveal-ok .surtitre.est-visible::before { animation: trait var(--dur-recit) var(--ease-arrivee) calc(var(--dur-rapide)) both; }
+
+  /* FAQ : le « + » tourne en « × », la réponse glisse en fondu. */
+  .faq__signe { transition: rotate var(--dur-interface) var(--ressort), background-color var(--dur-rapide) var(--ease-geste); }
+  .faq__item[open] .faq__reponse { animation: message var(--dur-interface) var(--ease-arrivee) both; }
+  /* Amélioration progressive (Chrome 131+) : la hauteur s'ouvre en douceur.
+     Exception assumée à la règle transform/opacity : zone très petite, déclenchée
+     par la personne, sans impact sur le reste de la page. */
+  @supports (interpolate-size: allow-keywords) {
+    .faq { interpolate-size: allow-keywords; }
+    .faq__item::details-content {
+      block-size: 0;
+      overflow-y: clip;
+      transition: block-size var(--dur-interface) var(--ease-geste), content-visibility var(--dur-interface) allow-discrete;
+    }
+    .faq__item[open]::details-content { block-size: auto; }
+  }
+
+  /* Formulaire : messages qui se posent, bouton qui respire pendant l'envoi. */
+  .champ__erreur:not([hidden]), .formulaire__resume:not([hidden]) { animation: message var(--dur-interface) var(--ease-arrivee); }
+  .formulaire__envoyer[aria-disabled="true"] .icone { animation: respire calc(var(--dur-souffle) / 8) var(--ease-souffle) infinite alternate; }
+  .formulaire__succes:not([hidden]) { animation: apparition var(--dur-recit) var(--ease-arrivee) both; }
+  .formulaire__succes:not([hidden]) .formulaire__succes-icone { animation: eclosion var(--dur-recit) var(--ressort) var(--dur-rapide) both; }
+  .formulaire__succes:not([hidden]) .formulaire__succes-icone path { stroke-dasharray: 22; animation: coche var(--dur-recit) var(--ease-arrivee) calc(var(--dur-interface)) both; }
+
+  /* Barre d'appel : glisse hors de l'écran pendant la saisie. */
+  .barre-appel { transition: translate var(--dur-interface) var(--ease-geste); }
+}
+@keyframes focus-pose { from { outline-offset: 7px; } }
+@keyframes trait { from { scale: 0 1; } }
+@keyframes message { from { opacity: 0; translate: 0 calc(var(--shift-sm) * -0.5); } }
+@keyframes respire { from { scale: 0.85; opacity: 0.6; } to { scale: 1.1; opacity: 1; } }
+@keyframes eclosion { from { scale: 0.6; opacity: 0; } }
+@keyframes coche { from { stroke-dashoffset: 22; } to { stroke-dashoffset: 0; } }
+
+/* ============================================================================
+ * 6. MENU MOBILE — feuille qui monte du bas (à portée de pouce).
+ * Entrée 420 ms ease-out doux, sortie 300 ms ease-in : on ne fait pas attendre.
+ * ========================================================================== */
+.menu .menu__feuille { translate: 0 100%; transition: translate var(--dur-sortie) var(--ease-depart); }
+.menu::backdrop { opacity: 0; transition: opacity var(--dur-sortie) var(--ease-depart); }
+.menu.est-ouvert .menu__feuille { translate: 0 0; transition: translate var(--dur-interface) var(--ease-arrivee); }
+.menu.est-ouvert::backdrop { opacity: 1; transition: opacity var(--dur-interface) var(--ease-geste); }
+@media (prefers-reduced-motion: no-preference) {
+  .menu.est-ouvert .menu__liens li { animation: apparition var(--dur-interface) var(--ease-arrivee) both; animation-delay: calc(80ms + var(--i, 0) * 35ms); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu .menu__feuille { translate: none; opacity: 0; transition: opacity var(--dur-rapide) linear; }
+  .menu.est-ouvert .menu__feuille { opacity: 1; transition: opacity var(--dur-rapide) linear; }
+}
+
+/* ============================================================================
+ * 7. TRANSITIONS ENTRE PAGES (View Transitions API, navigation entre documents)
+ * Accueil ↔ pages légales : l'en-tête et la barre d'appel restent immobiles,
+ * seul le contenu s'efface et se pose. Ignoré par les navigateurs qui ne
+ * connaissent pas l'API (navigation normale).
+ * ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  .entete { view-transition-name: entete; }
+  .barre-appel { view-transition-name: barre-appel; }
+  ::view-transition-old(root) { animation: vt-sortie var(--dur-sortie) var(--ease-depart) both; }
+  ::view-transition-new(root) { animation: vt-entree var(--dur-recit) var(--ease-arrivee) both; }
+}
+@keyframes vt-sortie { to { opacity: 0; } }
+@keyframes vt-entree { from { opacity: 0; translate: 0 var(--shift-md); } }
+
+/* Impression : tout visible, rien d'animé, pas d'éléments d'interface fixes. */
+@media print {
+  [data-reveal] { opacity: 1 !important; animation: none !important; }
+  .barre-appel, .hero__souffle, .souffle-pause, .menu, .entete__menu { display: none !important; }
+  body { padding-bottom: 0; }
+  .section { box-shadow: none; }
+}

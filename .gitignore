@@ -1,0 +1,28 @@
+# Site construit (régénéré par « npm run build », et par Netlify lors du déploiement)
+dist/
+
+# Dépendances (le projet n'en a aucune, par précaution)
+node_modules/
+
+# Fichier régénéré à chaque construction (rapport de poids)
+docs/poids.json
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Éditeurs
+.vscode/
+.idea/
+*.swp
+*~
+
+# Journaux et fichiers secrets
+*.log
+npm-debug.log*
+.env
+.env.*
+
+# Dossier local de Netlify (si l'outil en ligne de commande est utilisé)
+.netlify/

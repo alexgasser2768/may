@@ -36,22 +36,22 @@ son `"provisoire"` à `false`.
 | `site.titrePage` | May Van Overveldt — Kinésithérapeute à domicile à Woluwe-Saint-Pierre et environs |
 | `site.description` | Kiné à domicile à Woluwe-Saint-Pierre et environs : rééducation post-opératoire, gériat… |
 | `site.annee` | 2026 |
-| `contact.telephoneAffiche` | +32 470 22 74 19 |
+| `contact.telephoneAffiche` | +32 470 94 43 60 |
 | `contact.email` | mayv.kine@gmail.com |
 | `contact.horaires[0].jours` | Lundi – vendredi |
 | `contact.horaires[0].heures` | 8 h – 18 h |
 | `contact.horaires[1].jours` | Week-end et jours fériés |
 | `contact.horaires[1].heures` | Fermé |
 | `contact.joignabilite` | En séance, je ne décroche pas toujours. Laissez nom et numéro : je rappelle le jour mêm… |
-| `contact.urgence` | Pas pour les urgences : appelez le 112. |
+| `contact.urgence` | En cas d'urgence, appelez le 112. |
 | `accueil.surtitre` | Kinésithérapeute à domicile · Woluwe-Saint-Pierre |
 | `accueil.titre` | La kinésithérapie qui vient jusqu'à vous. |
 | `accueil.titreSouligne` | jusqu'à vous |
-| `accueil.texte` | Je suis May Van Overveldt. Je vous accompagne à domicile pour retrouver mouvement, auto… |
+| `accueil.texte` | Je m'appelle May Van Overveldt. Je vous accompagne avec bienveillance pour retrouver le… |
 | `accueil.reassurances[0]` | À domicile, autour de Woluwe-Saint-Pierre |
 | `accueil.reassurances[1]` | Sur prescription médicale |
 | `accueil.reassurances[2]` | Kinésithérapeute conventionnée |
-| `accueil.image.alt` | Portrait illustré de May Van Overveldt, souriante |
+| `accueil.image.alt` | Photo de May Van Overveldt, souriante, au bord d'un lac |
 | `accueil.image.legendeProvisoire` | Photo provisoire — portrait de May (format 4:5) |
 | `soins.surtitre` | Soins proposés |
 | `soins.titre` | Des soins adaptés à votre situation |

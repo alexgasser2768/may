@@ -20,9 +20,9 @@
   },
   "contact": {
     "provisoire": true,
-    "telephoneAffiche": "+32 470 22 74 19",
+    "telephoneAffiche": "+32 470 94 43 60",
     "_aideTelephoneLien": "Le numéro au format international, sans espaces (utilisé par les boutons « Appeler » et « SMS »).",
-    "telephoneLien": "+32470227419",
+    "telephoneLien": "+32470944360",
     "email": "mayv.kine@gmail.com",
     "horaires": [
       {
@@ -35,7 +35,7 @@
       }
     ],
     "joignabilite": "En séance, je ne décroche pas toujours. Laissez nom et numéro : je rappelle le jour même ou le lendemain matin.",
-    "urgence": "Pas pour les urgences : appelez le 112."
+    "urgence": "En cas d'urgence, appelez le 112."
   },
   "navigation": [
     {
@@ -85,15 +85,15 @@
     "titre": "La kinésithérapie qui vient jusqu'à vous.",
     "_aideTitreSouligne": "Partie du titre soulignée d'un trait dessiné à la main. Doit apparaître telle quelle dans le titre ; laissez \"\" pour aucun soulignement.",
     "titreSouligne": "jusqu'à vous",
-    "texte": "Je suis May Van Overveldt. Je vous accompagne à domicile pour retrouver mouvement, autonomie et confiance, à votre rythme.",
+    "texte": "Je m'appelle May Van Overveldt. Je vous accompagne avec bienveillance pour retrouver le plaisir de bouger, gagner en autonomie et améliorer votre qualité de vie au quotidien.",
     "reassurances": [
       "À domicile, autour de Woluwe-Saint-Pierre",
       "Sur prescription médicale",
       "Kinésithérapeute conventionnée"
     ],
     "image": {
-      "fichier": "may-portrait",
-      "alt": "Portrait illustré de May Van Overveldt, souriante",
+      "fichier": "may-photo",
+      "alt": "Photo de May Van Overveldt, souriante, au bord d'un lac",
       "largeur": 800,
       "hauteur": 1000,
       "legendeProvisoire": "Photo provisoire — portrait de May (format 4:5)"
@@ -438,7 +438,7 @@
         "commune": "Indiquez la commune des soins.",
         "message": "Écrivez quelques mots sur votre demande (le type de soin, par exemple).",
         "consentement": "Cochez cette case pour que je puisse vous rappeler.",
-        "envoi": "Échec de l'envoi (connexion ?). Réessayez ou appelez le +32 470 22 74 19."
+        "envoi": "Échec de l'envoi (connexion ?). Réessayez ou appelez le +32 470 94 43 60."
       },
       "envoyer": "Envoyer ma demande",
       "envoiEnCours": "Envoi en cours…",
